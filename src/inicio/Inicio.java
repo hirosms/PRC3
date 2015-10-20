@@ -1,4 +1,7 @@
-package prc3;
+package inicio;
+
+import prc3_game.EjemploGame;
+import prc3.EjemploRobot;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -84,7 +87,7 @@ public class Inicio extends javax.swing.JFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
-        //new EjemploGame().setVisible(true);
+        new EjemploGame().setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
