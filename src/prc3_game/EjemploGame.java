@@ -5,7 +5,9 @@
  */
 package prc3_game;
 
+import static java.lang.Math.random;
 import java.net.URL;
+import java.util.Random;
 import javax.swing.ImageIcon;
 
 /**
@@ -19,10 +21,22 @@ public class EjemploGame extends javax.swing.JFrame {
      */
     Character pj1 = new Character();
     Character pj2 = new Character();
+    final int max1 = (int) pj1.HP;
+    final int max2 = (int) pj2.HP;
+    float hit;
+    int contador1;
+    int contador2;
     
     public EjemploGame() {
         //Character pj1 = new Character();
+        hit = (float) 0.0;
+        contador1 = 0;
+        contador2 = 0;
         initComponents();
+        
+        jLabel6.setText("Jugador 1: "+contador1);
+        jLabel7.setText("Jugador 2: "+contador2);
+        
     }
 
     /**
@@ -48,6 +62,15 @@ public class EjemploGame extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        Vida_pj1 = new javax.swing.JProgressBar();
+        Vida_pj2 = new javax.swing.JProgressBar();
+        RADIO_ATA = new javax.swing.JRadioButton();
+        RADIO_DEF = new javax.swing.JRadioButton();
+        RADIO_REC = new javax.swing.JRadioButton();
+        jButton2 = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -100,29 +123,97 @@ public class EjemploGame extends javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        jLabel2.setText("jLabel2");
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img_ava/pj1.png"))); // NOI18N
 
-        jLabel3.setText("jLabel3");
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img_ava/pj2.png"))); // NOI18N
+
+        RADIO_ATA.setText("Ataque");
+        RADIO_ATA.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RADIO_ATAActionPerformed(evt);
+            }
+        });
+
+        RADIO_DEF.setText("Defensa");
+        RADIO_DEF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RADIO_DEFActionPerformed(evt);
+            }
+        });
+
+        RADIO_REC.setText("Recuperación");
+        RADIO_REC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RADIO_RECActionPerformed(evt);
+            }
+        });
+
+        jButton2.setText("Luchar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jLabel5.setText("jLabel5");
+
+        jLabel6.setText("jLabel6");
+
+        jLabel7.setText("jLabel7");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(41, 41, 41)
-                .addComponent(jLabel2)
-                .addGap(197, 197, 197)
-                .addComponent(jLabel3)
-                .addContainerGap(433, Short.MAX_VALUE))
+                .addContainerGap(41, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(Vida_pj1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(RADIO_REC)
+                            .addComponent(RADIO_ATA))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(RADIO_DEF, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(jLabel6))
+                .addGap(68, 68, 68)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel7)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(Vida_pj2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(21, 21, 21)
+                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel7))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel2))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(Vida_pj1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Vida_pj2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(RADIO_ATA)
+                    .addComponent(RADIO_DEF)
+                    .addComponent(jLabel5))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(RADIO_REC)
+                    .addComponent(jButton2))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -166,7 +257,7 @@ public class EjemploGame extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(Lab_Pic)
                             .addComponent(Radio_Pic))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(Lab_Gok)
                             .addComponent(Radio_Gok))
@@ -180,7 +271,7 @@ public class EjemploGame extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(Radio_Veg)
                             .addComponent(Lab_Veg))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton1))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
@@ -216,6 +307,7 @@ public class EjemploGame extends javax.swing.JFrame {
         // TODO add your handling code here:
         //Character pj1 = new Character();
         //Character pj2;
+        jLabel5.setVisible(false);
         ImageIcon icon;
         String path = "";//..\\img\\2.png";  
         URL url ;//= this.getClass().getResource(path);  
@@ -223,10 +315,10 @@ public class EjemploGame extends javax.swing.JFrame {
         if(Radio_Pic.isSelected())
         {
             //(ImageIcon icont, int HPt, int ATAt, int DEFt, int RECt)
-           pj1.set_Character("Piccolo",200,20,20,20);   
+           pj1.set_Character("Piccolo",1000,40,60,40);   
         }
         else if (Radio_Gok.isSelected())
-            pj1.set_Character("Goku",200,20,20,20);
+            pj1.set_Character("Goku",600,70,20,30);
         
         if(Radio_Buu.isSelected())
         {
@@ -234,7 +326,7 @@ public class EjemploGame extends javax.swing.JFrame {
            //pj2.set_Character("Buu",200,20,20,20);   
         }
         else if (Radio_Veg.isSelected())
-            pj2.set_Character("MajinVegeta",200,20,20,20);
+            pj2.set_Character("MajinVegeta",600,70,20,30);
  
         //jPanel1.removeAll();
         
@@ -242,12 +334,98 @@ public class EjemploGame extends javax.swing.JFrame {
         jPanel1.setVisible(true);
         
         jLabel2.setIcon(pj1.getIcon());
+        Vida_pj1.setMinimum(0);
+        Vida_pj1.setMaximum(max1);
+        Vida_pj1.setValue(max1);
               
         jLabel3.setIcon(pj2.getIcon());
+        Vida_pj2.setMinimum(0);
+        Vida_pj2.setMaximum(max2);
+        Vida_pj2.setValue(max2);
         
         jPanel1.repaint();
+        jButton2.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void RADIO_ATAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RADIO_ATAActionPerformed
+        // TODO add your handling code here:
+        RADIO_DEF.setSelected(false);
+        RADIO_REC.setSelected(false);
+    }//GEN-LAST:event_RADIO_ATAActionPerformed
+
+    private void RADIO_DEFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RADIO_DEFActionPerformed
+        // TODO add your handling code here:
+        RADIO_ATA.setSelected(false);
+        RADIO_REC.setSelected(false);
+    }//GEN-LAST:event_RADIO_DEFActionPerformed
+
+    private void RADIO_RECActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RADIO_RECActionPerformed
+        // TODO add your handling code here:
+        RADIO_DEF.setSelected(false);
+        RADIO_ATA.setSelected(false);
+    }//GEN-LAST:event_RADIO_RECActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        hit =  (float) Math.abs(Math.floor((Math.random()*2+0)*10)/10); // Random para el ataque
+        int vida2 = Vida_pj2.getValue();
+        int vida1 = Vida_pj1.getValue();
+        //jLabel3.setText(""+hit);
+        //jLabel2.setText(""+hit);
+        
+        //final int vida1 = Vida_pj1.getValue();
+        if (vida1 != 0 && vida2 != 0)
+        {
+            if(RADIO_ATA.isSelected())
+            {
+                ataque(pj1,pj2,vida2,hit,Vida_pj2);
+            }
+            else
+                if(RADIO_DEF.isSelected())
+                {
+                    pj1.setDEF((int)(pj1.getDEF()+(pj1.getDEF())));
+                }
+                else if (RADIO_REC.isSelected())
+                {
+                    pj1.com = new Comp_Reposo();
+                    vida1 = (int) (vida1+(pj1.com.moveCommand(pj1)*hit));
+                }
+            //jLabel2.setText(""+vida1);
+            //jLabel3.setText(""+vida2);
+            //ataque(pj2,pj1,vida1,hit,Vida_pj1);
+        }
+        else if (vida1 == 0)
+        {
+            jLabel5.setText("You Lost!!");
+            jLabel5.setVisible(true);
+            jButton2.setVisible(false);
+            contador2++;
+            jLabel7.setText("Jugador 2: "+contador2);
+        }
+        else if (vida2 == 0)
+        {
+            jLabel5.setText("You Win!!");
+            jLabel5.setVisible(true);
+            jButton2.setVisible(false);
+            contador1++;
+            jLabel6.setText("Jugador 1: "+contador1);
+            
+        }
+        
+       ataque(pj2,pj1,vida1,hit,Vida_pj1);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    void ataque (Character atacante, Character defensor,int vida_def, float hit,javax.swing.JProgressBar p)
+    {
+            atacante.com = new Comp_Agresivo();
+            defensor.com = new Comp_Defensivo();
+            
+            jPanel1.setVisible(true);
+            float daño = Math.abs((((atacante.com.moveCommand(pj1)*hit)*10)/10)-defensor.com.moveCommand(pj2));
+                  
+            //jLabel2.setText("DAÑO"+daño);       
+            p.setValue((int) (vida_def - daño));
+    }
     /**
      * @param args the command line arguments
      */
@@ -288,15 +466,24 @@ public class EjemploGame extends javax.swing.JFrame {
     private javax.swing.JLabel Lab_Gok;
     private javax.swing.JLabel Lab_Pic;
     private javax.swing.JLabel Lab_Veg;
+    private javax.swing.JRadioButton RADIO_ATA;
+    private javax.swing.JRadioButton RADIO_DEF;
+    private javax.swing.JRadioButton RADIO_REC;
     private javax.swing.JRadioButton Radio_Buu;
     private javax.swing.JRadioButton Radio_Gok;
     private javax.swing.JRadioButton Radio_Pic;
     private javax.swing.JRadioButton Radio_Veg;
+    private javax.swing.JProgressBar Vida_pj1;
+    private javax.swing.JProgressBar Vida_pj2;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }

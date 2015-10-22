@@ -15,20 +15,16 @@ import javax.swing.ImageIcon;
  * 
  * @author Sergio Martín Santana <sergio.ms.91@gmail.com>
  */
-public class DefensiveBehaivour implements iBehaviour{
-    ImageIcon icon;
+public class Comp_Agresivo implements iBehaviour{
     
-    public int moveCommand(Character pj)
+    
+    public float moveCommand(Character pj)
     {
-        /*String path = "..\\img\\2.png";  
+        /*String path = "..\\img\\3.png";  
         URL url = this.getClass().getResource(path);  
-        icon = new ImageIcon(url);  */
-        return pj.DEF;
+        icon = new ImageIcon(url); */ 
+        return pj.ATA;
     }
-    
-    public ImageIcon get_icon ()
-    {
-        return icon;
-    }
+   
 
 }

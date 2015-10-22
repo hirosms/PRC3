@@ -16,7 +16,7 @@ import javax.swing.ImageIcon;
 public class Character {
     
     ImageIcon icon = new ImageIcon ();
-    int HP;
+    float HP;
     int ATA;
     int DEF;
     int REC;
@@ -30,13 +30,13 @@ public class Character {
     ImageIcon icono = new ImageIcon(url);
     this.icon = icono;
         
-    this.HP = 100;
-    this.ATA = 100;
-    this.DEF = 100;
-    this.REC = 100;
+    this.HP = 1000;
+    this.ATA = 40;
+    this.DEF = 60;
+    this.REC = 40;
     }
     
-    public void set_Character(String name, int HPt, int ATAt, int DEFt, int RECt) {
+    public void set_Character(String name, float HPt, int ATAt, int DEFt, int RECt) {
         
     String path = "..\\img_ava\\"+name+".png";
     URL url  = this.getClass().getResource(path);
@@ -53,7 +53,7 @@ public class Character {
         return icon;
     }
 
-    public int getHP() {
+    public float getHP() {
         return HP;
     }
 
@@ -77,7 +77,7 @@ public class Character {
         this.icon = icon;
     }
 
-    public void setHP(int HP) {
+    public void setHP(float HP) {
         this.HP = HP;
     }
 

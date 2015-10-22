@@ -14,7 +14,7 @@ import javax.swing.ImageIcon;
  */
 public interface iBehaviour {
     
-    public int moveCommand(Character pj);
+    public float moveCommand(Character pj);
     
     
 }
